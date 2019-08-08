@@ -1,6 +1,7 @@
 export const state = () => ({
   products: [],
   cart: [],
+  currency: "ARS",
   page: {},
   fetchingProducts: false
 });
@@ -11,6 +12,9 @@ export const mutations = {
   },
   ADD_PRODUCTS(state, products) {
     products.forEach(p => state.products.push(p));
+  },
+  SET_CURRENCY(state, currency) {
+    state.currency = currency;
   },
   SET_PAGE(state, page) {
     state.page = page;
@@ -27,9 +31,9 @@ export const mutations = {
 };
 
 export const actions = {
-  async nuxtServerInit({ commit }, { $axios }) {
-    const { data } = await $axios.get(
-      "https://challenge-api.aerolab.co/products"
+  async nuxtServerInit({ commit }) {
+    const { data } = await this.$axios.get(
+      "http://localhost:3000/api/products"
     );
     commit("SET_PRODUCTS", data.products);
 
@@ -43,7 +47,7 @@ export const actions = {
     commit("SET_FETCHING_PRODUCTS", true);
 
     const { data } = await this.$axios.get(
-      `https://challenge-api.aerolab.co/products?page=${pageNumber}`
+      `http://localhost:3000/api/products?page=${pageNumber}`
     );
     commit("ADD_PRODUCTS", data.products);
 
@@ -59,12 +63,21 @@ export const actions = {
 
 export const getters = {
   cartTotal(state) {
-    return state.cart.length
-      ? state.cart
-          .map(item => item.price)
-          .reduce((total, price) => total + price)
-          .toFixed(2)
-          .replace(/\./g, ",")
-      : false;
+    let prices = [];
+
+    if (state.cart.length) {
+      if (state.currency == "ARS") {
+        prices = state.cart.map(item => item.price);
+      } else {
+        prices = state.cart.map(item => item[`priceIn${state.currency}`]);
+      }
+
+      return prices
+        .reduce((total, price) => total + price)
+        .toFixed(2)
+        .replace(/\./g, ",");
+    }
+
+    return false;
   }
 };

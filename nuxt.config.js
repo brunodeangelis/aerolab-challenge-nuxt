@@ -7,7 +7,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: "Ezshop | Aerolab Challenge",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -56,5 +56,8 @@ module.exports = {
     extend(config, ctx) {}
   },
 
-  serverMiddleware: [{ path: "/api", handler: "~/api/index.js" }]
+  serverMiddleware: [{ path: "/api", handler: "~/api/index.js" }],
+  env: {
+    API_URL: process.env.API_URL || "http://localhost:3000"
+  }
 };

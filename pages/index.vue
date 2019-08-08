@@ -1,6 +1,16 @@
 <template>
   <div class="container">
     <h2 class="leading-none font-bold text-2xl my-5">Almacén</h2>
+    <div class="mb-5">
+      <p class="text-sm mb-2">Seleccione la moneda</p>
+      <button
+        v-for="(btnCurrency, i) in currencies"
+        :key="i"
+        class="text-sm btn primary outline mr-1"
+        :class="{ 'fill': btnCurrency == currency }"
+        @click="$store.commit('SET_CURRENCY', btnCurrency)"
+      >{{ btnCurrency }}</button>
+    </div>
     <div class="grid-container mb-8">
       <ProductCard v-for="product in products" :key="product.id" :product="product" />
     </div>
@@ -15,6 +25,11 @@ import ProductCard from "@/components/ProductCard";
 export default {
   components: {
     ProductCard
+  },
+  data() {
+    return {
+      currencies: ["ARS", "USD"]
+    };
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
@@ -38,7 +53,8 @@ export default {
     ...mapState({
       products: state => state.products,
       page: state => state.page,
-      fetchingProducts: state => state.fetchingProducts
+      fetchingProducts: state => state.fetchingProducts,
+      currency: state => state.currency
     })
   }
 };

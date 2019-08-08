@@ -4,15 +4,14 @@
     <div class="text-center mt-2 flex flex-col flex-1">
       <p class="text-sm text-center">{{ product.name }}</p>
 
-      <h3 v-if="!isOnSale(product)" class="font-bold text-primary text-normal mt-3 mb-4 flex-1">
-        <span v-show="isOnCart(product)">{{ amountOnCart(product) }}x</span>
-        ${{ formatPrice(product.price) }}
-      </h3>
-      <div v-else class="flex justify-center items-center flex-1">
-        <span class="font-bold text-xs line-through mr-2">${{ formatPrice(product.originalPrice) }}</span>
+      <div class="flex justify-center items-center flex-1 mt-3 mb-4">
+        <span
+          v-if="isOnSale(product)"
+          class="font-bold text-xs line-through mr-2"
+        >${{ currency != "ARS" ? formatPrice(product[`originalPriceIn${currency}`]) : formatPrice(product.originalPrice) }}</span>
         <h3 class="font-bold text-primary text-normal">
           <span v-show="isOnCart(product)">{{ amountOnCart(product) }}x</span>
-          ${{ formatPrice(product.price) }}
+          ${{ currency != "ARS" ? formatPrice(product[`priceIn${currency}`]) : formatPrice(product.price) }}
         </h3>
       </div>
 
@@ -61,7 +60,8 @@ export default {
   computed: {
     ...mapState({
       cart: state => state.cart,
-      page: state => state.page
+      page: state => state.page,
+      currency: state => state.currency
     })
   }
 };

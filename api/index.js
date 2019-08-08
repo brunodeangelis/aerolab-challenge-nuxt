@@ -19,10 +19,12 @@ router.get("/products", async (req, res) => {
   const now = moment();
 
   // Add field priceInDollars to each product.
-  products.data.products.forEach(
-    p =>
-      (p.priceInDollars = parseFloat((p.price / dollar.data.rate).toFixed(2)))
-  );
+  products.data.products.forEach(p => {
+    p.priceInUSD = parseFloat((p.price / dollar.data.rate).toFixed(2));
+    p.originalPriceInUSD = parseFloat(
+      (p.originalPrice / dollar.data.rate).toFixed(2)
+    );
+  });
 
   // Filter by the difference in date from now.
   // If it's greater than a month, we filter out that product.
