@@ -20,17 +20,23 @@ export default {
   },
   methods: {
     onScroll() {
-      console.log(window.pageYOffset);
+      const scrollPosition = window.pageYOffset + window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
-      console.log(docHeight);
-      if (window.pageYOffset > docHeight - 300) {
-        console.log("ahora");
+      if (
+        scrollPosition > docHeight - 550 &&
+        this.page.current < this.page.total &&
+        !this.fetchingProducts
+      ) {
+        const nextPage = this.page.current + 1;
+        this.$store.dispatch("fetchPage", nextPage);
       }
     }
   },
   computed: {
     ...mapState({
-      products: state => state.products
+      products: state => state.products,
+      page: state => state.page,
+      fetchingProducts: state => state.fetchingProducts
     })
   }
 };
