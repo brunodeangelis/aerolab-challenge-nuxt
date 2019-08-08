@@ -1,0 +1,66 @@
+<template>
+  <article class="bg-white px-3 py-4 rounded shadow flex flex-col">
+    <img :src="product.photo" :alt="product.name" />
+    <div class="text-center mt-2 flex flex-col flex-1">
+      <p class="text-sm text-center">{{ product.name }}</p>
+      <h3 v-if="!isOnSale(product)" class="font-bold text-primary text-normal mt-3 mb-4 flex-1">
+        <span v-show="isOnCart(product)">{{ amountOnCart(product) }}x</span>
+        ${{ formatPrice(product.price) }}
+      </h3>
+      <div v-else class="flex justify-center items-center flex-1">
+        <span class="font-bold text-xs line-through mr-2">${{ formatPrice(product.originalPrice) }}</span>
+        <h3 class="font-bold text-primary text-normal">
+          <span v-show="isOnCart(product)">{{ amountOnCart(product) }}x</span>
+          ${{ formatPrice(product.price) }}
+        </h3>
+      </div>
+      <button
+        v-if="!isOnCart(product)"
+        class="btn primary outline text-sm"
+        @click="$store.commit('ADD_TO_CART', product)"
+      >Agregar al carrito</button>
+      <div v-else class="flex items-center justify-between">
+        <button
+          class="w-8 h-8 bg-primary text-white rounded text-sm"
+          @click="$store.commit('REMOVE_FROM_CART', product)"
+        >-</button>
+        <span class="text-center text-primary text-sm font-bold">{{ amountOnCart(product) }}</span>
+        <button
+          class="w-8 h-8 bg-primary text-white rounded text-sm"
+          @click="$store.commit('ADD_TO_CART', product)"
+        >+</button>
+      </div>
+    </div>
+  </article>
+</template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  props: ["product"],
+  methods: {
+    isOnSale(product) {
+      return product.price < product.originalPrice;
+    },
+    isOnCart(product) {
+      return this.cart.some(p => p.id == product.id);
+    },
+    amountOnCart(product) {
+      return this.cart.filter(p => p.id == product.id).length;
+    },
+    formatPrice(price) {
+      return price
+        .toFixed(2)
+        .toString()
+        .replace(/\./g, ",");
+    }
+  },
+  computed: {
+    ...mapState({
+      cart: state => state.cart,
+      page: state => state.page
+    })
+  }
+};
+</script>

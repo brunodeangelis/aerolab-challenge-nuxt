@@ -1,8 +1,16 @@
 module.exports = {
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#0070E0"
+      }
+    },
     fontFamily: {
       sans: "Inter"
+    },
+    container: {
+      center: true,
+      padding: "1rem"
     }
   },
   variants: {},
