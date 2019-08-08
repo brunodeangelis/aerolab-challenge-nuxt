@@ -3,6 +3,7 @@
     <img :src="product.photo" :alt="product.name" />
     <div class="text-center mt-2 flex flex-col flex-1">
       <p class="text-sm text-center">{{ product.name }}</p>
+
       <h3 v-if="!isOnSale(product)" class="font-bold text-primary text-normal mt-3 mb-4 flex-1">
         <span v-show="isOnCart(product)">{{ amountOnCart(product) }}x</span>
         ${{ formatPrice(product.price) }}
@@ -14,6 +15,7 @@
           ${{ formatPrice(product.price) }}
         </h3>
       </div>
+
       <button
         v-if="!isOnCart(product)"
         class="btn primary outline text-sm"

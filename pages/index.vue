@@ -1,9 +1,10 @@
 <template>
   <div class="container">
     <h2 class="leading-none font-bold text-2xl my-5">Almacén</h2>
-    <div class="grid-container mb-32">
+    <div class="grid-container mb-8">
       <ProductCard v-for="product in products" :key="product.id" :product="product" />
     </div>
+    <div class="flex justify-center mb-16 text-primary" v-show="fetchingProducts">Cargando...</div>
   </div>
 </template>
 
@@ -22,6 +23,7 @@ export default {
     onScroll() {
       const scrollPosition = window.pageYOffset + window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
+
       if (
         scrollPosition > docHeight - 550 &&
         this.page.current < this.page.total &&

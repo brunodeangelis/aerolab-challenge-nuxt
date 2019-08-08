@@ -15,6 +15,7 @@
     "@nuxtjs/pwa": "^2.6.0",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
+    "moment": "^2.24.0",
     "nuxt": "^2.4.0",
     "vuex-persistedstate": "^2.5.4"
   },
