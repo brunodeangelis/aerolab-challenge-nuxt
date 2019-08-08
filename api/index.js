@@ -12,11 +12,15 @@ router.get("/products", async (req, res) => {
     page = req.query.page;
   }
 
-  const dollar = await axios.get(`https://challenge-api.aerolab.co/dollar`);
-  const products = await axios.get(
+  const dollarPromise = axios.get(`https://challenge-api.aerolab.co/dollar`);
+  const productsPromise = axios.get(
     `https://challenge-api.aerolab.co/products?page=${page}`
   );
-  const now = moment();
+
+  const [dollar, products] = await Promise.all([
+    dollarPromise,
+    productsPromise
+  ]);
 
   // Add field priceInUSD to each product.
   products.data.products.forEach(p => {
@@ -28,6 +32,7 @@ router.get("/products", async (req, res) => {
 
   // Filter by the difference in date from now.
   // If it's greater than a month, we filter out that product.
+  const now = moment();
   products.data.products = products.data.products.filter(p => {
     const updatedAt = moment(p.updatedAt);
     return now.diff(updatedAt, "months") < 1;
