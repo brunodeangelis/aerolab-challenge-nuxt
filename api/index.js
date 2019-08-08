@@ -18,7 +18,7 @@ router.get("/products", async (req, res) => {
   );
   const now = moment();
 
-  // Add field priceInDollars to each product.
+  // Add field priceInUSD to each product.
   products.data.products.forEach(p => {
     p.priceInUSD = parseFloat((p.price / dollar.data.rate).toFixed(2));
     p.originalPriceInUSD = parseFloat(

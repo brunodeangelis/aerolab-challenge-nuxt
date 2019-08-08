@@ -1,6 +1,12 @@
 <template>
   <article class="bg-white px-3 py-4 rounded shadow flex flex-col">
-    <img :src="product.photo" :alt="product.name" />
+    <picture>
+      <source :srcset="JPEGtoWEBP(product.photo)" type="image/webp" />
+      <source :srcset="product.photo" type="image/jpeg" />
+      <img :src="product.photo" :alt="product.name" />
+    </picture>
+
+    <!-- <img :src="product.photo" :alt="product.name" /> -->
     <div class="text-center mt-2 flex flex-col flex-1">
       <p class="text-sm text-center">{{ product.name }}</p>
 
@@ -55,6 +61,9 @@ export default {
         .toFixed(2)
         .toString()
         .replace(/\./g, ",");
+    },
+    JPEGtoWEBP(jpeg) {
+      return jpeg.replace(/(.jpg)/g, ".webp");
     }
   },
   computed: {
