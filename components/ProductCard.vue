@@ -6,7 +6,6 @@
       <img :src="product.photo" :alt="product.name" />
     </picture>
 
-    <!-- <img :src="product.photo" :alt="product.name" /> -->
     <div class="text-center mt-2 flex flex-col flex-1">
       <p class="text-sm text-center">{{ product.name }}</p>
 

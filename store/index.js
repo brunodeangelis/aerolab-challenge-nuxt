@@ -32,24 +32,22 @@ export const mutations = {
 
 export const actions = {
   async nuxtServerInit({ commit }) {
-    const { data } = await this.$axios.get(
-      "http://localhost:3000/api/products"
-    );
-    commit("SET_PRODUCTS", data.products);
+    const shop = await this.$axios.$get("http://localhost:3000/api/products");
+    commit("SET_PRODUCTS", shop.products);
 
     const page = {
-      current: data.page,
-      total: data.page_count
+      current: shop.page,
+      total: shop.page_count
     };
     commit("SET_PAGE", page);
   },
   async fetchPage({ state, commit }, pageNumber) {
     commit("SET_FETCHING_PRODUCTS", true);
 
-    const { data } = await this.$axios.get(
+    const shop = await this.$axios.$get(
       `http://localhost:3000/api/products?page=${pageNumber}`
     );
-    commit("ADD_PRODUCTS", data.products);
+    commit("ADD_PRODUCTS", shop.products);
 
     const page = {
       current: pageNumber,
