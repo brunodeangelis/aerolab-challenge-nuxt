@@ -3,6 +3,9 @@ module.exports = {
     extend: {
       colors: {
         primary: "#0070E0"
+      },
+      fontSize: {
+        "6xl": "4rem"
       }
     },
     fontFamily: {

@@ -1,5 +1,5 @@
 <template>
-  <article class="bg-white px-3 py-4 rounded shadow flex flex-col">
+  <article class="product bg-white px-3 py-4 rounded shadow flex flex-col items-center w-full">
     <picture>
       <source :srcset="JPEGtoWEBP(product.photo)" type="image/webp" />
       <source :srcset="product.photo" type="image/jpeg" />
@@ -74,3 +74,17 @@ export default {
   }
 };
 </script>
+
+<style>
+@media (min-width: 1024px) {
+  .product {
+    transition: all 150ms ease-in-out;
+  }
+
+  .product:hover {
+    transform: translateY(-1px);
+    @apply shadow-md;
+  }
+}
+</style>
+

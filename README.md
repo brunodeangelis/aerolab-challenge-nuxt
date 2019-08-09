@@ -2,12 +2,13 @@ Ver el desafío [acá](https://github.com/Aerolab/challenge).
 
 ## Parte 1
 
-1. ✅ Diseño traducido a código usando [TailwindCSS](https://tailwindcss.com/).
+1. ✅ [Diseño](https://challenge-api.aerolab.co/design/) traducido a código usando [TailwindCSS](https://tailwindcss.com/).
 
 2. Utilizando [Nuxt.js](https://nuxtjs.org/):
 
 - ✅ Infinite scrolling.
 - ✅ Agregar/restar productos del carrito. No se pierde al hacer refresh.
+- ✅ Switcher de monedas (ARS, USD).
 
 3. API personalizada en el endpoint /api:
 

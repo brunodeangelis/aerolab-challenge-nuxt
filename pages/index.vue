@@ -1,16 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="leading-none font-bold text-2xl my-5">Almacén</h2>
-    <div class="mb-5">
-      <p class="text-sm mb-2">Seleccione la moneda</p>
-      <button
-        v-for="(btnCurrency, i) in currencies"
-        :key="i"
-        class="text-sm btn primary outline mr-1"
-        :class="{ 'fill': btnCurrency == currency }"
-        @click="$store.commit('SET_CURRENCY', btnCurrency)"
-      >{{ btnCurrency }}</button>
-    </div>
+    <h2 class="leading-none font-bold text-2xl lg:text-5xl my-5 lg:my-12 lg:tracking-tight">Almacén</h2>
     <div class="grid-container mb-8">
       <ProductCard v-for="product in products" :key="product.id" :product="product" />
     </div>
@@ -25,11 +15,6 @@ import ProductCard from "@/components/ProductCard";
 export default {
   components: {
     ProductCard
-  },
-  data() {
-    return {
-      currencies: ["ARS", "USD"]
-    };
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
@@ -53,17 +38,20 @@ export default {
     ...mapState({
       products: state => state.products,
       page: state => state.page,
-      fetchingProducts: state => state.fetchingProducts,
-      currency: state => state.currency
+      fetchingProducts: state => state.fetchingProducts
     })
   }
 };
 </script>
 
-<style>
+<style lang="scss">
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   grid-gap: 1rem;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  }
 }
 </style>
