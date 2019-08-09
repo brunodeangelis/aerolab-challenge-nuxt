@@ -32,7 +32,9 @@ export const mutations = {
 
 export const actions = {
   async nuxtServerInit({ commit }) {
-    const shop = await this.$axios.$get("http://localhost:3000/api/products");
+    const shop = await this.$axios.$get(
+      "https://aerolab-challenge-nuxt.brunodeangelis.now.sh/api/products"
+    );
     commit("SET_PRODUCTS", shop.products);
 
     const page = {
@@ -45,7 +47,7 @@ export const actions = {
     commit("SET_FETCHING_PRODUCTS", true);
 
     const shop = await this.$axios.$get(
-      `http://localhost:3000/api/products?page=${pageNumber}`
+      `https://aerolab-challenge-nuxt.brunodeangelis.now.sh/api/products?page=${pageNumber}`
     );
     commit("ADD_PRODUCTS", shop.products);
 

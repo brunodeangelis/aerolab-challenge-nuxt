@@ -30,8 +30,7 @@ router.get("/products", async (req, res) => {
     );
   });
 
-  // Filter by the difference in date from now.
-  // If it's greater than a month, we filter out that product.
+  // If it's less than a month old, we let it stay in the array.
   const now = moment();
   products.data.products = products.data.products.filter(p => {
     const updatedAt = moment(p.updatedAt);

@@ -47,20 +47,5 @@ export default {
 </script>
 
 <style>
-.fade-down-enter-active,
-.fade-down-leave-active {
-  transition: all 125ms ease-in-out;
-}
-.fade-down-enter, .fade-down-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-
-.currency-dropdown {
-  top: 40px;
-  width: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  @apply absolute bg-white shadow-lg text-sm rounded;
-}
 </style>
 

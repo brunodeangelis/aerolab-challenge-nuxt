@@ -1,5 +1,3 @@
-const pkg = require("./package");
-
 module.exports = {
   mode: "universal",
 
@@ -11,7 +9,11 @@ module.exports = {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: pkg.description }
+      {
+        hid: "description",
+        name: "description",
+        content: "Resolución del Aerolab/challenge usando Nuxt.js"
+      }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
@@ -60,8 +62,5 @@ module.exports = {
     extend(config, ctx) {}
   },
 
-  serverMiddleware: [{ path: "/api", handler: "~/api/index.js" }],
-  env: {
-    API_URL: process.env.API_URL || "http://localhost:3000"
-  }
+  serverMiddleware: [{ path: "/api", handler: "~/api/index.js" }]
 };

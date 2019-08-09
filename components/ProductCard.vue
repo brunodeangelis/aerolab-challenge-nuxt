@@ -83,7 +83,7 @@ export default {
 
   .product:hover {
     transform: translateY(-1px);
-    @apply shadow-md;
+    @apply shadow-lg;
   }
 }
 </style>

@@ -6,14 +6,14 @@ Ver el desafío [acá](https://github.com/Aerolab/challenge).
 
 2. Utilizando [Nuxt.js](https://nuxtjs.org/):
 
-- ✅ Infinite scrolling.
-- ✅ Agregar/restar productos del carrito. No se pierde al hacer refresh.
-- ✅ Switcher de monedas (ARS, USD).
+   - ✅ Infinite scrolling.
+   - ✅ Agregar/restar productos del carrito. No se pierde al hacer refresh.
+   - ✅ Switcher de monedas (ARS, USD).
 
 3. API personalizada en el endpoint /api:
 
-- ✅ Agrega el precio en dólares por cada producto.
-- ✅ Sólo trae los productos que tienen como máximo 1 mes de antigüedad.
+   - ✅ Agrega el precio en dólares por cada producto.
+   - ✅ Sólo trae los productos que tienen como máximo 1 mes de antigüedad.
 
 4. ✅ Deploy app y API en Now.
 
